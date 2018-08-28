@@ -1,9 +1,13 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+.content {
+  padding-top: 100px;
+  width: 80%;
+  margin: auto; }
 
 .form-container {
   width: 40%;
