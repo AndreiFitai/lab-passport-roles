@@ -11,3 +11,25 @@ a {
   width: 40%;
   margin: auto;
 }
+
+.list-container{
+  .user-card{
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    margin: 30px;
+
+    .email{
+      width: 300px;
+    }
+
+    .options >form{
+      width: 400px;
+      display: flex;
+      flex-flow: row nowrap;
+      .form-check{
+        margin: 0 30px;
+      }
+    }
+  }
+}

@@ -1,12 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-/* GET home page */
-router.get("/", (req, res, next) => {
-  if (!req.user || req.user.role != "Boss") {
-    res.render("index");
-  } else if (req.user.role == "Boss") res.render("indexBoss");
-});
 
 router.get("/list", (req, res, next) => {
   if (!req.user || req.user.role != "Boss") {

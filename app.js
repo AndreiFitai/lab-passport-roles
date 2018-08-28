@@ -13,6 +13,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
+const User = require("./models/User");
 
 mongoose.Promise = Promise;
 mongoose
@@ -72,21 +73,27 @@ passport.deserializeUser((id, cb) => {
 });
 
 passport.use(
-  new LocalStrategy((username, password, next) => {
-    User.findOne({ username }, (err, user) => {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        return next(null, false, { message: "Incorrect username" });
-      }
-      if (!bcrypt.compareSync(password, user.password)) {
-        return next(null, false, { message: "Incorrect password" });
-      }
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password"
+    },
+    (email, password, next) => {
+      User.findOne({ email }, (err, user) => {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return next(null, false, { message: "Incorrect username" });
+        }
+        if (!bcrypt.compareSync(password, user.password)) {
+          return next(null, false, { message: "Incorrect password" });
+        }
 
-      return next(null, user);
-    });
-  })
+        return next(null, user);
+      });
+    }
+  )
 );
 
 app.set("views", path.join(__dirname, "views"));
@@ -97,11 +104,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "Ironhack GmbH";
 
 const index = require("./routes/index");
 const auth = require("./routes/auth");
+const list = require("./routes/list");
 app.use("/", index);
 app.use("/", auth);
+app.use("/", list);
 
 module.exports = app;

@@ -9,4 +9,18 @@ a {
   width: 40%;
   margin: auto; }
 
+.list-container .user-card {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  margin: 30px; }
+  .list-container .user-card .email {
+    width: 300px; }
+  .list-container .user-card .options > form {
+    width: 400px;
+    display: flex;
+    flex-flow: row nowrap; }
+    .list-container .user-card .options > form .form-check {
+      margin: 0 30px; }
+
 /*# sourceMappingURL=style.css.map */

@@ -7,8 +7,8 @@ const userSchema = new Schema({
   googleId: String,
   role: {
     type: String,
-    enum: ["Boss", "Developer", "TA"],
-    default: "Developer"
+    enum: ["Boss", "Developer", "TA","User"],
+    default: "User"
   }
 });
 
